@@ -1,0 +1,14 @@
+AllCops:
+  NewCops: enable
+
+Metrics/BlockLength:
+  Exclude:
+    - 'cleo-vending_machine.gemspec'
+    - 'test/**/*'
+
+Style/Documentation:
+  Exclude:
+    - 'lib/cleo/vending_machine.rb'
+    - 'lib/cleo/vending_machine/exception.rb'
+    - 'lib/cleo/vending_machine/product.rb'
+    - 'test/**/*'

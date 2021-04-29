@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "README";
+  relpath = '';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><div id='filecontents'>
+<h1 id="label-Cleo-3A-3AVendingMachine">Cleo::VendingMachine</h1>
+
+<p>A Backend Engineer Take Home Test</p>
+
+<p>Note: Open /docs/index.html on your favourite browser for maximum enjoyment (?)</p>
+
+<p>Anonymized online version also available at:</p>
+<ul><li>
+<p>Full Documentation: <a href="https://9193403494.github.io/cleo-vending_machine">9193403494.github.io/cleo-vending_machine</a>/</p>
+</li><li>
+<p>Repository: <a href="https://github.com/9193403494/cleo-vending_machine">github.com/9193403494/cleo-vending_machine</a></p>
+</li></ul>
+
+<h2 id="label-Objective">Objective</h2>
+
+<p>For this we’d like you to write code for a vending machine that behaves as follows:</p>
+<ul><li>
+<p>Once an item is selected and the appropriate amount of money is inserted, the vending machine should return the correct product</p>
+</li><li>
+<p>The machine should return change if too much money is provided</p>
+</li><li>
+<p>The machine should ask for more money if insufficient funds have been inserted</p>
+</li><li>
+<p>The machine should take an initial load of products and change</p>
+</li><li>
+<p>The change will be of denominations: 1p, 2p, 5p, 10p, 20p, 50p, £1, £2</p>
+</li><li>
+<p>There should be a way of reloading products at a later point</p>
+</li><li>
+<p>There should be a way of reloading change at a later point</p>
+</li><li>
+<p>The machine should keep track of the products and change that it contains</p>
+</li></ul>
+
+<p>Your solution should be provided as library code that implements the business logic defined above. We don’t want you to write a UI to drive it as well. We don’t want you to spend too long on this so we’d expect you to spend between two and three hours. As part of your submission please tell us how much time you do spend on it.</p>
+
+<h2 id="label-Initial+Considerations">Initial Considerations</h2>
+<ul><li>
+<p>I will focus on creating a Ruby library following the previouly described behaviour. This seems to be pretty good scenario for some sort of state machine, although it might be a little overkilling given the simplicity of the API.</p>
+</li><li>
+<p>The lack of UI suppose a lack of interaction with a real device so all the inputs and outputs will be relaying on Ruby standard classes. Even though I can create some models to represent both the change and the products, forcing the consumer to instanciate those before loading/realoading seems to be also a little too much, so we will resort once again to Ruby standard classes, probably identifying products by code and change by its value in pence.</p>
+</li><li>
+<p>The lifecycle of the VendingMachine will be bound to its instance, it will keep track of its current state, but persistence outside the process will be delagated to the library consumer.</p>
+</li><li>
+<p>The change will be able to count with the money that was just handed by the buyer.</p>
+</li><li>
+<p>The machine will request more money until the product value is covered</p>
+</li><li>
+<p>After covering the product&#39;s cost the VendingMachine will raise an exception and abort the transaction if it is not able to return the proper amount of change. Real machines usually default to Exact Pay mode preentevly if they are missing any of the possible change scenarios. Creating a communication interface to keep the library consumer updated on the current status, without overexposing arguibly sensitive information, is way out of scope and, even if it is doable, does not make much sence without a deeper discussion of the expected behaviour around that.</p>
+</li><li>
+<p>As exposing the stock has not being mentioned the consumer will be able to ask for any product by code and an exception will be rised if the product is not available (it won&#39;t really differenciate between <em>unknown</em> and out if stock product codes).</p>
+</li></ul>
+
+<h2 id="label-Usage+Design+-28before+implementation-29">Usage Design (before implementation)</h2>
+
+<pre class="code ruby"><code class="ruby">require &#39;cleo/vending_machine&#39;
+
+  initial_products = {
+    11111: {
+      quantity: 3,
+      price: 13
+    }
+  }
+
+  initial_change = {
+    1: 20,
+    2, 10,
+    50: 5
+  }
+
+  vm = Cleo::VendingMachine.new(    #=&gt; #&lt;Cleo::VendingMachine
+    products: initial_products,     #    @state=&quot;ready&quot;,
+    change: initial_change          #    @balance=0
+  )                                 #    @selected_product=nil
+                                    #   &gt;
+
+  vm.request_product(11111)         #=&gt; #&lt;Cleo::VendingMachine::Exchange
+                                    #     @balance=-12
+                                    #     @change=nil
+                                    #     @product=nil
+                                    #   &gt;
+12
+  vm                                #=&gt; #&lt;Cleo::VendingMachine
+                                    #     @state=&quot;waiting_payment&quot;,
+                                    #     @balance=-12,
+                                    #     @selected_product=#&lt;Cleo::VendingMachine::Product @code=11111, @price=12&gt;
+                                    #   &gt;
+
+  vm.pay(10)                        #=&gt; #&lt;Cleo::VendingMachine::Exchange
+                                    #     @balance=-2
+                                    #     @change=nil
+                                    #     @product=nil
+                                    #   &gt;
+
+  vm                                #=&gt; #&lt;Cleo::VendingMachine
+                                    #     @state=&quot;waiting_payment&quot;,
+                                    #     @balance=-2,
+                                    #     @selected_product=#&lt;Cleo::VendingMachine::Product @code=11111, @price=12&gt;
+                                    #   &gt;
+
+  vm.pay(5)                         #=&gt; #&lt;Cleo::VendingMachine::Exchange
+                                    #     @balance=3
+                                    #     @change={1: 1, 2: 1}
+                                    #     @product=#&lt;Cleo::VendingMachine::Product @code=11111, @price=12&gt;
+                                    #   &gt;
+
+  vm                                #=&gt; #&lt;Cleo::VendingMachine
+                                    #     @state=&quot;ready&quot;,
+                                    #     @balance=0,
+                                    #     @selected_product=nil
+                                    #   &gt;
+
+  vm.add_products(initial_products)
+  vm.add_change(initial_change)
+</code></pre>
+
+<h2 id="label-Coding+time-21">Coding time!</h2>
+
+<p><img src="https://media.giphy.com/media/XBir51JYWZYSb8IxvV/giphy.gif"></p>
+
+<h2 id="label-Reviewing+initial+considerations+-2F+Implementation+notes">Reviewing initial considerations / Implementation notes</h2>
+<ul><li>
+<p>Loading products/change as hashes feels a little bit off but I still think it represents a realistic scenario on how the library would actually interact with the consumer. If the <code>Product</code> becomes something shared between domains it should probably be extracted from inside that module and it would make more sense at that point to have <code>Product</code> instances as inputs.</p>
+</li><li>
+<p>For the change calculations I went with a <em>greedy</em> implementation, abusing the exceptions a little bit as flow control between recursions cycles. To account for the limited pool of change/denominations I just proceeded to check and eliminate invalid branches, starting from the <em>greediest</em> all the way to the most generous one.</p>
+</li><li>
+<p>Pretty hapy with the overall encapsulation.</p>
+</li><li>
+<p>It could use some more time investment around documentation here and there.</p>
+</li><li>
+<p>It definitely need some more time investment around how the tests are organized. It&#39;s covering everything but the separation fo cencerns is not looking good.</p>
+</li><li>
+<p>Same goes for the implementation itself, mostly around the VendingMachine class itself, there are too many variables getting affected by the main methods.</p>
+</li><li>
+<p>This implementation is not thread safe. Does not need much more effort to make it thread safe as some locks around the main transactional operations would be enough. Did skip that to prevent an extra leyer of complexity, the extra tests needed and the unexpected bugs I might need to get back to within such a short tiemeframe.</p>
+</li><li>
+<p>I really wanted to create <code>Products</code> as some sort of <code>Enumerable</code> class, run out of time so I left it as an internal Hash, representing the available product codes and the available stock of each of them.</p>
+</li><li>
+<p>Same for the <code>Vault</code>, would like to create a colletion-like model to sotre the denominations with their current count as internal attributes rather than a plain Hash.</p>
+</li><li>
+<p>Was planning on extending those exceptions a little bit more, with a custom error message and some variables. #OutOfTime</p>
+</li><li>
+<p>The implemntation expect both Product and Change loads to hold positive quantities. Adding validations over 0 (ignoring tthe entry) and negative numbres (raising an error) would be pretty simple to do.</p>
+</li></ul>
+
+<h2 id="label-Actual+Usage">Actual Usage</h2>
+
+<pre class="code ruby"><code class="ruby">require &#39;cleo/vending_machine&#39;
+
+  initial_products = {
+    11111: {
+      quantity: 3,
+      price: 13
+    }
+  }
+
+  initial_change = {
+    1: 20,
+    2, 10,
+    50: 5
+  }
+
+  vm = Cleo::VendingMachine.new(    #=&gt; #&lt;Cleo::VendingMachine
+    products: initial_products,     #     @state=&quot;idle&quot;,
+    change: initial_change          #     @exchange=nil
+  )                                 #   &gt;
+
+  vm.request_product(11111)         #=&gt; #&lt;Cleo::VendingMachine::Exchange
+                                    #     @balance=-12
+                                    #     @change=nil
+                                    #     @product=nil
+                                    #   &gt;
+12
+  vm                                #=&gt; #&lt;Cleo::VendingMachine
+                                    #     @state=&quot;waiting_payment&quot;,
+                                    #     @exchange=#&lt;Cleo::VendingMachine::Exchange ...&gt;
+                                    #   &gt;
+
+  vm.pay(10)                        #=&gt; #&lt;Cleo::VendingMachine::Exchange
+                                    #     @balance=-2
+                                    #     @change=nil
+                                    #     @product=nil
+                                    #   &gt;
+
+  vm                                #=&gt; #&lt;Cleo::VendingMachine
+                                    #     @state=&quot;waiting_payment&quot;,
+                                    #     @exchange=#&lt;Cleo::VendingMachine::Exchange ...&gt;
+                                    #   &gt;
+
+  vm.pay(5)                         #=&gt; #&lt;Cleo::VendingMachine::Exchange
+                                    #     @balance=3
+                                    #     @change={1: 1, 2: 1}
+                                    #     @product=#&lt;Cleo::VendingMachine::Product @code=11111, @price=12&gt;
+                                    #   &gt;
+
+  vm                                #=&gt; #&lt;Cleo::VendingMachine
+                                    #     @state=&quot;idle&quot;,
+                                    #     @exchange=nil
+                                    #   &gt;
+
+  vm.add_products(initial_products)
+  vm.add_change(initial_change)
+</code></pre>
+
+<h2 id="label-Running+tests">Running tests</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_rake'>rake</span> <span class='id identifier rubyid_test'>test</span>
+</code></pre>
+
+<h2 id="label-Current+tests-2Fcoverage+status">Current tests/coverage status</h2>
+
+<pre class="code ruby"><code class="ruby"># Running:
+
+.................................
+
+Finished in 0.009553s, 3454.4657 runs/s, 4187.2312 assertions/s.
+
+33 runs, 40 assertions, 0 failures, 0 errors, 0 skips
+Coverage report generated for Unit Tests to /cleo-vending_machine/coverage. 130 / 130 LOC (100.0%) covered.
+</code></pre>
+
+<h2 id="label-Trivia">Trivia</h2>
+<ul><li>
+<p><code>cleo-vending_machine</code> looks funny but it is just following the gem naming conventions 🤷</p>
+</li><li>
+<p>Documented using YARD. It is still rdoc compatible</p>
+</li><li>
+<p>The github pages were almost for free, building the yard docs and publishing those under the gb-pages branch</p>
+</li><li>
+<p>The whole project has been Rubocopped, small exceptions has been set under the .rubucop.yaml</p>
+</li><li>
+<p>Tested with Minitest specs</p>
+</li><li>
+<p>The ruby version has been set to 2.7.2, was tempted to use 3.0 but I would probably get distracted trying things out 😆</p>
+</li><li>
+<p>Have Simplecov in place to make sure everything was covered and that the main use cases were actually making use of all the defined classes/methods.</p>
+</li><li>
+<p>The library implementation + the <code>VendingMachine</code> specs + wirting all this down took my all the alloted time. I&#39;ve spent a couple of minutes on top adding some unit tests aroud the <code>Vault</code>. Coverage was still 100% form the get go, as the <code>VendingMachine</code> was actually relaying on everything else. For the rest of the classes they are mostly initializers with a couple of getters, the current <em>integration</em> tests (the <code>VendingMachine</code> specs) are good enough to keep them safe.</p>
+</li></ul>
+
+<h2 id="label-That-27s+a+wrap-21">That&#39;s a wrap!</h2>
+
+<p><img src="https://media.giphy.com/media/l0IycQmt79g9XzOWQ/giphy.gif"></p>
+</div></div>
+
+      <div id="footer">
+  Generated on Fri Apr 30 01:09:30 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.7.2).
+</div>
+
+    </div>
+  </body>
+</html>

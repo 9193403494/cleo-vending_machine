@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Cleo::VendingMachine
+  
+    &mdash; Documentation by YARD 0.9.26
+  
+</title>
+
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Cleo::VendingMachine";
+  relpath = '../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../_index.html">Index (V)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../Cleo.html" title="Cleo (module)">Cleo</a></span></span>
+     &raquo; 
+    <span class="title">VendingMachine</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Cleo::VendingMachine
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Cleo::VendingMachine</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/cleo/vending_machine.rb<span class="defines">,<br />
+  lib/cleo/vending_machine/vault.rb,<br /> lib/cleo/vending_machine/product.rb,<br /> lib/cleo/vending_machine/exchange.rb,<br /> lib/cleo/vending_machine/exception.rb,<br /> lib/cleo/vending_machine/exception/invalid_operation_error.rb,<br /> lib/cleo/vending_machine/exception/unavailable_change_error.rb,<br /> lib/cleo/vending_machine/exception/unavailable_product_error.rb</span>
+</dd>
+  </dl>
+  
+</div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+  
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="VendingMachine/Exception.html" title="Cleo::VendingMachine::Exception (module)">Exception</a></span>, <span class='object_link'><a href="VendingMachine/State.html" title="Cleo::VendingMachine::State (module)">State</a></span>
+    
+  
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="VendingMachine/Exchange.html" title="Cleo::VendingMachine::Exchange (class)">Exchange</a></span>, <span class='object_link'><a href="VendingMachine/Product.html" title="Cleo::VendingMachine::Product (class)">Product</a></span>, <span class='object_link'><a href="VendingMachine/Vault.html" title="Cleo::VendingMachine::Vault (class)">Vault</a></span>
+    
+  
+</p>
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#exchange-instance_method" title="#exchange (instance method)">#<strong>exchange</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute exchange.</p>
+</div></span>
+  
+</li>
+
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#state-instance_method" title="#state (instance method)">#<strong>state</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute state.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_change-instance_method" title="#add_change (instance method)">#<strong>add_change</strong>(incoming_change)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#add_products-instance_method" title="#add_products (instance method)">#<strong>add_products</strong>(incoming_products)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#idle%3F-instance_method" title="#idle? (instance method)">#<strong>idle?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(products: {}, change: {})  &#x21d2; VendingMachine </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of VendingMachine.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#pay-instance_method" title="#pay (instance method)">#<strong>pay</strong>(amount)  &#x21d2; Cleo::VendingMachine::Exchange </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#request_product-instance_method" title="#request_product (instance method)">#<strong>request_product</strong>(code)  &#x21d2; Cleo::VendingMachine::Exchange </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#waiting_payment%3F-instance_method" title="#waiting_payment? (instance method)">#<strong>waiting_payment?</strong>  &#x21d2; Boolean </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(products: {}, change: {})  &#x21d2; <tt><span class='object_link'><a href="" title="Cleo::VendingMachine (class)">VendingMachine</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of VendingMachine.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>The initial load of products and change can be done by passing along a hash representation of them.</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="Cleo::VendingMachine (class)">VendingMachine</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
+  <span class='label'>products:</span> <span class='lbrace'>{</span>
+    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>1111</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='lbrace'>{</span>
+      <span class='label'>quantity:</span> <span class='int'>1</span><span class='comma'>,</span>
+      <span class='label'>price:</span> <span class='int'>1</span>
+    <span class='rbrace'>}</span>
+  <span class='rbrace'>}</span><span class='comma'>,</span>
+  <span class='label'>change:</span> <span class='lbrace'>{</span>
+    <span class='int'>1</span> <span class='op'>=&gt;</span> <span class='int'>1</span>
+  <span class='rbrace'>}</span>
+<span class='rparen'>)</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>products</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;String,Hash&lt;Symbol,Fixnum&gt;&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash representation of the initial load of Products.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>change</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Fixnum,Fixnum&gt;</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>{}</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash representation of the initial load of change.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+34
+35
+36
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 34</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>products:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>change:</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@products</span> <span class='op'>=</span> <span class='id identifier rubyid_products'>products</span>
+  <span class='ivar'>@vault</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="VendingMachine/Vault.html" title="Cleo::VendingMachine::Vault (class)">Vault</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="VendingMachine/Vault.html#initialize-instance_method" title="Cleo::VendingMachine::Vault#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>change:</span> <span class='id identifier rubyid_change'>change</span><span class='rparen'>)</span>
+
+  <span class='id identifier rubyid_idle!'>idle!</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="exchange-instance_method">
+  
+    #<strong>exchange</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute exchange.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_exchange'>exchange</span>
+  <span class='ivar'>@exchange</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id=""></span>
+      <div class="method_details ">
+  <h3 class="signature " id="state-instance_method">
+  
+    #<strong>state</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute state.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_state'>state</span>
+  <span class='ivar'>@state</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="add_change-instance_method">
+  
+    #<strong>add_change</strong>(incoming_change)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>incoming_change</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;Fixnum,Fixnum&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash representation of the an assortment of change.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_change'>add_change</span><span class='lparen'>(</span><span class='id identifier rubyid_incoming_change'>incoming_change</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_vault'>vault</span><span class='period'>.</span><span class='id identifier rubyid_add_change'>add_change</span><span class='lparen'>(</span><span class='id identifier rubyid_incoming_change'>incoming_change</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="add_products-instance_method">
+  
+    #<strong>add_products</strong>(incoming_products)  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>incoming_products</span>
+      
+      
+        <span class='type'>(<tt>Hash&lt;String,Hash&lt;Symbol,Fixnum&gt;&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>A hash representation of an assortment of Products.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+42
+43
+44
+45
+46
+47
+48</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 42</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_add_products'>add_products</span><span class='lparen'>(</span><span class='id identifier rubyid_incoming_products'>incoming_products</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_incoming_products'>incoming_products</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_code'>code</span><span class='comma'>,</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='op'>|</span>
+    <span class='id identifier rubyid_products'>products</span><span class='lbracket'>[</span><span class='id identifier rubyid_code'>code</span><span class='rbracket'>]</span> <span class='op'>||=</span> <span class='lbrace'>{</span> <span class='label'>quantity:</span> <span class='int'>0</span> <span class='rbrace'>}</span>
+    <span class='id identifier rubyid_products'>products</span><span class='lbracket'>[</span><span class='id identifier rubyid_code'>code</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span> <span class='op'>+=</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='symbol'>:quantity</span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_products'>products</span><span class='lbracket'>[</span><span class='id identifier rubyid_code'>code</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='symbol'>:price</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='id identifier rubyid_attributes'>attributes</span><span class='lbracket'>[</span><span class='symbol'>:price</span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="idle?-instance_method">
+  
+    #<strong>idle?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+68
+69
+70</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 68</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_idle?'>idle?</span>
+  <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="VendingMachine/State.html" title="Cleo::VendingMachine::State (module)">State</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="VendingMachine/State.html#IDLE-constant" title="Cleo::VendingMachine::State::IDLE (constant)">IDLE</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="pay-instance_method">
+  
+    #<strong>pay</strong>(amount)  &#x21d2; <tt><span class='object_link'><a href="VendingMachine/Exchange.html" title="Cleo::VendingMachine::Exchange (class)">Cleo::VendingMachine::Exchange</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>amount</span>
+      
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="VendingMachine/Exchange.html" title="Cleo::VendingMachine::Exchange (class)">Cleo::VendingMachine::Exchange</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="VendingMachine/Exception/InvalidOperationError.html" title="Cleo::VendingMachine::Exception::InvalidOperationError (class)">Cleo::VendingMachine::Exception::InvalidOperationError</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+58
+59
+60
+61
+62
+63
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 58</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_pay'>pay</span><span class='lparen'>(</span><span class='id identifier rubyid_amount'>amount</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="VendingMachine/Exception.html" title="Cleo::VendingMachine::Exception (module)">Exception</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="VendingMachine/Exception/InvalidOperationError.html" title="Cleo::VendingMachine::Exception::InvalidOperationError (class)">InvalidOperationError</a></span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_waiting_payment?'>waiting_payment?</span>
+
+  <span class='id identifier rubyid_register_payment'>register_payment</span><span class='lparen'>(</span><span class='id identifier rubyid_amount'>amount</span><span class='rparen'>)</span>
+
+  <span class='kw'>return</span> <span class='id identifier rubyid_close_transaction!'>close_transaction!</span> <span class='kw'>if</span> <span class='id identifier rubyid_balance'>balance</span> <span class='op'>&gt;=</span> <span class='int'>0</span>
+
+  <span class='id identifier rubyid_exchange'>exchange</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="request_product-instance_method">
+  
+    #<strong>request_product</strong>(code)  &#x21d2; <tt><span class='object_link'><a href="VendingMachine/Exchange.html" title="Cleo::VendingMachine::Exchange (class)">Cleo::VendingMachine::Exchange</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>code</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="VendingMachine/Exchange.html" title="Cleo::VendingMachine::Exchange (class)">Cleo::VendingMachine::Exchange</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="VendingMachine/Exception/UnavailableProductError.html" title="Cleo::VendingMachine::Exception::UnavailableProductError (class)">Cleo::VendingMachine::Exception::UnavailableProductError</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+75
+76
+77
+78
+79
+80
+81</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 75</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_request_product'>request_product</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'><span class='object_link'><a href="VendingMachine/Exception.html" title="Cleo::VendingMachine::Exception (module)">Exception</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="VendingMachine/Exception/UnavailableProductError.html" title="Cleo::VendingMachine::Exception::UnavailableProductError (class)">UnavailableProductError</a></span></span> <span class='kw'>if</span> <span class='id identifier rubyid_products'>products</span><span class='lbracket'>[</span><span class='id identifier rubyid_code'>code</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
+  <span class='id identifier rubyid_select_product!'>select_product!</span><span class='lparen'>(</span><span class='id identifier rubyid_code'>code</span><span class='rparen'>)</span>
+
+  <span class='ivar'>@exchange</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="VendingMachine/Exchange.html" title="Cleo::VendingMachine::Exchange (class)">Exchange</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="VendingMachine/Exchange.html#initialize-instance_method" title="Cleo::VendingMachine::Exchange#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>balance:</span> <span class='op'>-</span><span class='id identifier rubyid_selected_product'>selected_product</span><span class='period'>.</span><span class='id identifier rubyid_price'>price</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="waiting_payment?-instance_method">
+  
+    #<strong>waiting_payment?</strong>  &#x21d2; <tt>Boolean</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/cleo/vending_machine.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_waiting_payment?'>waiting_payment?</span>
+  <span class='id identifier rubyid_state'>state</span> <span class='op'>==</span> <span class='const'><span class='object_link'><a href="VendingMachine/State.html" title="Cleo::VendingMachine::State (module)">State</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="VendingMachine/State.html#WAITING_PAYMENT-constant" title="Cleo::VendingMachine::State::WAITING_PAYMENT (constant)">WAITING_PAYMENT</a></span></span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Fri Apr 30 01:09:31 2021 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.26 (ruby-2.7.2).
+</div>
+
+    </div>
+  </body>
+</html>
